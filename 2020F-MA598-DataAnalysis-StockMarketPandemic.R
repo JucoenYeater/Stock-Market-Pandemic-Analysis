@@ -1,9 +1,11 @@
-rm(list=ls())
-install.packages("quantmod")
-install.packages("ggplot2")
-install.packages("tidyquant")
-install.packages("tidyverse")
-install.packages("dplyr")
+#Removes variables from the environment for a fresh run
+#rm(list=ls())
+
+#Checks if packages are installed and installs them if they are not already installed
+list.of.packages <- c("ggplot2", "quantmod", "tidyquant", "tidyverse", "dplyr")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+
 library(quantmod)
 library(ggplot2)
 library(tidyquant)
@@ -12,7 +14,6 @@ library(dplyr)
 library(COVID19)
 
 #Uses the COVID19 library
-covid2 <- covid19()
 covid2 <- subset(covid19(), administrative_area_level_1 == "United States")
 covid2 <- select(covid2, id, date, confirmed)
 covid2$daily <- ave(covid2$confirmed, covid2$id, FUN=function(x) c(0, diff(x)))
@@ -26,19 +27,6 @@ covid2 %>%
   theme(plot.title = element_text(hjust = 0.5)) +
   scale_x_date(date_labels = "%b %y", date_breaks = "1 month") +
   geom_line()
-
-
-
-#Test, not used for project
-tsla <- getSymbols("TSLA", src = "yahoo", from = "2020-01-01", to = "2020-12-31", auto.assign = FALSE)
-pbr <- getSymbols("PBR", src = "yahoo", from = "2020-01-01", to = "2020-12-31", auto.assign = FALSE)
-
-#Not necessary to run
-#nasdaq <- tq_exchange("NASDAQ")
-
-
-
-
 
 
 
