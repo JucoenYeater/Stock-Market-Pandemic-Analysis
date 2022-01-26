@@ -9,4 +9,4 @@ Note that the R code no longer functions correctly for the following reason:
   the code not possible. In the future, since this is historical data, I will download the portion
   of the dataset that I used so that the code will continue to function correctly even if the dataset
   is changed or updated in any way.
-I will be updated this in the future so the code works correctly again.
+I will be updating this in the future so the code works correctly again.
